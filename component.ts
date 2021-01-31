@@ -18,3 +18,53 @@ const routes: Routes = [
     component: component
   }
 ]
+
+
+//Example
+#create a module
+ng g m users // This will create users module in app module
+
+#Create 2 Components under the Users Module
+ng g c users/login
+ng g c users/signup
+
+# In the users module ts file export users module component to call in another components.
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+
+# also export components by adding below code
+  exports: [
+    LoginComponent,
+    SignupComponent
+  ]
+
+# Import users module in the app module ts file
+import { UsersModule } from './users/users.module';
+  imports: [
+    UsersModule
+  ]
+
+# Add Users components in app routing modules ts file
+import { LoginComponent } from './users/login/login.component';
+import { SignupComponent } from './users/signup/signup.component';
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  }
+];
+
+# Add navigation in app component html file
+<ul>
+    <li>
+        <a routerLink="login">Login</a>
+    </li>
+    <li>
+        <a routerLink="signup">Sign up</a>
+    </li>
+</ul>
+<router-outlet></router-outlet>
